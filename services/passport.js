@@ -24,7 +24,9 @@ passport.use(
     },
     (accessToken, refreshToken, profile, done) => {
       User.findOne({ googleId: profile.id }).then(existingUser => {
-        if (typeof existingUser === "undefined") {
+        if (existingUser) {
+          done(null, existingUser);
+        } else {
           new User({
             googleId: profile.id
           })
@@ -32,8 +34,6 @@ passport.use(
             .then(user => {
               done(null, user);
             });
-        } else {
-          done(null, existingUser);
         }
       });
     }
