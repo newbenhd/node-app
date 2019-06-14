@@ -19,6 +19,7 @@ class Header extends Component {
           <li key="payment">
             <Payment />
           </li>,
+          <li key="credits">Credits: {this.props.auth.credits}</li>,
           <li key="logout">
             <a href="/api/logout">Logout</a>
           </li>

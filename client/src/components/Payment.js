@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import StripeCheckout from "react-stripe-checkout";
+import { connect } from "react-redux";
+import * as actions from "../actions";
 
 class Payment extends Component {
   render() {
     return (
       <StripeCheckout
         token={token => {
-          console.log(token);
+          this.props.fetchStripe(token);
         }}
         stripeKey={process.env.REACT_APP_STRIPE_KEY}
         name="D3 Live Show"
@@ -18,4 +20,7 @@ class Payment extends Component {
   }
 }
 
-export default Payment;
+export default connect(
+  null,
+  actions
+)(Payment);
